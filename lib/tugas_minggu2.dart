@@ -106,9 +106,10 @@ class TugasMinggu2 extends StatelessWidget {
       children: [
         const CircleAvatar(
           radius: 24,
-          backgroundColor: Colors.white,
-          backgroundImage: NetworkImage(imgUrl),
-          child: add == true ? Icon(Icons.add) : null,
+          backgroundColor: Colors.blue,
+          // TODO
+          // backgroundImage: NetworkImage(imgUrl),
+          // child: add == true ? Icon(Icons.add) : null,
         ),
         SizedBox(height: 4),
         Text(

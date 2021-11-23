@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'tugas_minggu2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,10 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomepageBootcamp(),
+      home: TugasMinggu2(),
     );
   }
 }

@@ -87,10 +87,30 @@ class TugasMinggu2 extends StatelessWidget {
                     _storiesHighlights(title: 'Story 4', imgUrl: ''),
                     _storiesHighlights(title: 'Add', imgUrl: ''),
                   ],
-                )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: ImageIcon(
+                        AssetImage('assets/icon/vector.png'),
+                        color: Colors.black,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: ImageIcon(
+                        AssetImage('assets/icon/union.png'),
+                        color: Colors.black,
+                      ),
+                    )
+                  ],
+                ),
               ],
             ),
           ),
+          //TODO : GridView
         ],
       ),
     );
@@ -107,7 +127,7 @@ class TugasMinggu2 extends StatelessWidget {
         const CircleAvatar(
           radius: 24,
           backgroundColor: Colors.blue,
-          // TODO
+          // TODO : bugfix
           // backgroundImage: NetworkImage(imgUrl),
           // child: add == true ? Icon(Icons.add) : null,
         ),

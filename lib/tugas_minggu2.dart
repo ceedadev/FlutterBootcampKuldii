@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 Color kWhiteColor = const Color(0xffFFFFFF);
@@ -8,6 +10,7 @@ Color kGreyColor = const Color(0xffC4C4C4);
 Color kBlackColor = const Color(0xFF000000);
 
 TextStyle blackTextStyle = TextStyle(color: kBlackColor);
+TextStyle blueTextStyle = TextStyle(color: kBlueColor);
 
 class TugasMinggu2 extends StatelessWidget {
   const TugasMinggu2({Key? key}) : super(key: key);
@@ -16,78 +19,164 @@ class TugasMinggu2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kWhiteColor,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: kWhiteColor,
-        title: Row(
-          children: [
-            Text(
-              'username',
-              style: blackTextStyle,
+      appBar: appBarMethod(),
+      bottomNavigationBar: bottomNavBarMethod(),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const CircleAvatar(
+                      radius: 48,
+                    ),
+                    _profileCount(count: '99', title: 'Posts'),
+                    _profileCount(count: '168', title: 'Followers'),
+                    _profileCount(count: '199', title: 'Following'),
+                  ],
+                ),
+                // username
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 2),
+                  child: Text(
+                    'username',
+                    style: blackTextStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 24),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 2),
+                  child: RichText(
+                    text: TextSpan(children: [
+                      const TextSpan(
+                          text:
+                              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy '),
+                      TextSpan(text: '#hashtag', style: blueTextStyle)
+                    ], style: blackTextStyle),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 2),
+                  child: Text(
+                    'Link goes here',
+                    textAlign: TextAlign.justify,
+                    style: blueTextStyle,
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Edit Profile',
+                      style: blackTextStyle,
+                    ),
+                  ),
+                )
+              ],
             ),
-            IconButton(
-              onPressed: () {},
-              icon: const ImageIcon(
-                AssetImage('assets/icon/dropdown.png'),
-                color: Colors.black,
-              ),
-            ),
-          ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Column _profileCount({
+    required String count,
+    required String title,
+  }) {
+    return Column(
+      children: [
+        Text(
+          count,
+          style: blackTextStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 24),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.add_box_outlined),
-            color: kBlackColor,
+        Text(
+          title,
+          style: blackTextStyle.copyWith(fontWeight: FontWeight.w400, fontSize: 16),
+        ),
+      ],
+    );
+  }
+
+  BottomNavigationBar bottomNavBarMethod() {
+    return BottomNavigationBar(
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      backgroundColor: kWhiteColor,
+      unselectedItemColor: kBlackColor,
+      selectedItemColor: kBlueColor,
+      type: BottomNavigationBarType.fixed,
+      elevation: 0,
+      items: [
+        const BottomNavigationBarItem(
+          label: 'Home',
+          icon: ImageIcon(
+            AssetImage('assets/icon/home.png'),
+          ),
+        ),
+        const BottomNavigationBarItem(
+          label: 'Search',
+          icon: ImageIcon(
+            AssetImage('assets/icon/search.png'),
+          ),
+        ),
+        const BottomNavigationBarItem(
+          label: 'Reels',
+          icon: ImageIcon(
+            AssetImage('assets/icon/reels.png'),
+          ),
+        ),
+        const BottomNavigationBarItem(
+          label: 'Shop',
+          icon: ImageIcon(
+            AssetImage('assets/icon/shop.png'),
+          ),
+        ),
+        BottomNavigationBarItem(
+          label: 'User',
+          icon: Image.asset('assets/icon/avatar.png'),
+        ),
+      ],
+    );
+  }
+
+  AppBar appBarMethod() {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: kWhiteColor,
+      title: Row(
+        children: [
+          Text(
+            'username',
+            style: blackTextStyle,
           ),
           IconButton(
             onPressed: () {},
             icon: const ImageIcon(
-              AssetImage('assets/icon/burger.png'),
+              AssetImage('assets/icon/dropdown.png'),
               color: Colors.black,
             ),
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        backgroundColor: kWhiteColor,
-        unselectedItemColor: kBlackColor,
-        selectedItemColor: kBlueColor,
-        type: BottomNavigationBarType.fixed,
-        elevation: 0,
-        items: [
-          BottomNavigationBarItem(
-            label: 'Home',
-            icon: ImageIcon(
-              AssetImage('assets/icon/home.png'),
-            ),
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.add_box_outlined),
+          color: kBlackColor,
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const ImageIcon(
+            AssetImage('assets/icon/burger.png'),
+            color: Colors.black,
           ),
-          BottomNavigationBarItem(
-            label: 'Search',
-            icon: ImageIcon(
-              AssetImage('assets/icon/search.png'),
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: 'Reels',
-            icon: ImageIcon(
-              AssetImage('assets/icon/reels.png'),
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: 'Shop',
-            icon: ImageIcon(
-              AssetImage('assets/icon/shop.png'),
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: 'User',
-            icon: Image.asset('assets/icon/avatar.png'),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

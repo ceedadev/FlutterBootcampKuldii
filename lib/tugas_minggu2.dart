@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 
@@ -50,6 +50,7 @@ class TugasMinggu2 extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 2),
                   child: RichText(
+                    textAlign: TextAlign.justify,
                     text: TextSpan(children: [
                       const TextSpan(
                           text:
@@ -67,6 +68,7 @@ class TugasMinggu2 extends StatelessWidget {
                   ),
                 ),
                 Container(
+                  margin: const EdgeInsets.symmetric(vertical: 2),
                   width: double.infinity,
                   child: OutlinedButton(
                     onPressed: () {},
@@ -75,12 +77,45 @@ class TugasMinggu2 extends StatelessWidget {
                       style: blackTextStyle,
                     ),
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _storiesHighlights(title: 'Story 1', imgUrl: '', add: true),
+                    _storiesHighlights(title: 'Story 2', imgUrl: ''),
+                    _storiesHighlights(title: 'Story 3', imgUrl: ''),
+                    _storiesHighlights(title: 'Story 4', imgUrl: ''),
+                    _storiesHighlights(title: 'Add', imgUrl: ''),
+                  ],
                 )
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Column _storiesHighlights({
+    required String title,
+    required String imgUrl,
+    bool add = false,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const CircleAvatar(
+          radius: 24,
+          backgroundColor: Colors.white,
+          backgroundImage: NetworkImage(imgUrl),
+          child: add == true ? Icon(Icons.add) : null,
+        ),
+        SizedBox(height: 4),
+        Text(
+          title,
+          style: blackTextStyle.copyWith(fontSize: 12),
+        )
+      ],
     );
   }
 

@@ -61,7 +61,7 @@ class HomepageBootcamp extends StatelessWidget {
               itemCount: 100,
               itemBuilder: (context, index) {
                 return Container(
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                     top: 16,
                     right: 16,
                     left: 16,

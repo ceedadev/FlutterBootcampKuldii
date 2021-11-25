@@ -16,7 +16,7 @@ TextStyle blueTextStyle = TextStyle(color: kBlueColor);
 class TugasMinggu2 extends StatelessWidget {
   TugasMinggu2({Key? key}) : super(key: key);
 
-  var faker = new Faker();
+  var faker = Faker();
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +34,31 @@ class TugasMinggu2 extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const CircleAvatar(
-                      radius: 48,
+                    SizedBox(
+                      width: 76,
+                      height: 76,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [kOrangeColor, kRedColor]),
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                          ),
+                          Container(
+                            width: 72,
+                            height: 72,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: kWhiteColor, width: 2),
+                              borderRadius: BorderRadius.circular(100),
+                              color: kWhiteColor,
+                              image: DecorationImage(
+                                  image: NetworkImage('https://picsum.photos/300/300'), fit: BoxFit.cover),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     _profileCount(count: '99', title: 'Posts'),
                     _profileCount(count: '168', title: 'Followers'),
@@ -84,11 +107,11 @@ class TugasMinggu2 extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _storiesHighlights(title: 'Story 1', imgUrl: '', add: true),
-                    _storiesHighlights(title: 'Story 2', imgUrl: ''),
-                    _storiesHighlights(title: 'Story 3', imgUrl: ''),
-                    _storiesHighlights(title: 'Story 4', imgUrl: ''),
-                    _storiesHighlights(title: 'Add', imgUrl: ''),
+                    _storiesHighlights(title: 'Story 1', imgUrl: 'https://picsum.photos/id/1/300/300'),
+                    _storiesHighlights(title: 'Story 2', imgUrl: 'https://picsum.photos/id/2/300/300'),
+                    _storiesHighlights(title: 'Story 3', imgUrl: 'https://picsum.photos/id/3/300/300'),
+                    _storiesHighlights(title: 'Story 4', imgUrl: 'https://picsum.photos/id/4/300/300'),
+                    _storiesHighlights(title: 'Add', add: true),
                   ],
                 ),
                 Row(
@@ -114,9 +137,10 @@ class TugasMinggu2 extends StatelessWidget {
             ),
           ),
           GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, crossAxisSpacing: 1, mainAxisSpacing: 1),
             scrollDirection: Axis.vertical,
-            itemCount: 18,
+            itemCount: 72,
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (context, index) {
@@ -139,18 +163,33 @@ class TugasMinggu2 extends StatelessWidget {
 
   Column _storiesHighlights({
     required String title,
-    required String imgUrl,
+    String imgUrl = '',
     bool add = false,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const CircleAvatar(
-          radius: 24,
-          backgroundColor: Colors.blue,
-          // TODO : bugfix
-          // backgroundImage: NetworkImage(imgUrl),
-          // child: add == true ? Icon(Icons.add) : SizedBox(),
+        Container(
+          width: 68,
+          height: 68,
+          padding: EdgeInsets.all(1),
+          decoration: BoxDecoration(
+            color: kGreyColor,
+            borderRadius: BorderRadius.circular(100),
+          ),
+          child: Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: kWhiteColor,
+              borderRadius: BorderRadius.circular(100),
+              border: Border.all(color: kWhiteColor, width: 2),
+              image: DecorationImage(
+                image: NetworkImage(imgUrl),
+              ),
+            ),
+            child: add == true ? Image.asset('assets/icon/group1.png') : SizedBox(),
+          ),
         ),
         SizedBox(height: 4),
         Text(

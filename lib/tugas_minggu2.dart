@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:faker/faker.dart';
 
 Color kWhiteColor = const Color(0xffFFFFFF);
 Color kBlueColor = const Color(0xff004C8B);
@@ -13,7 +14,9 @@ TextStyle blackTextStyle = TextStyle(color: kBlackColor);
 TextStyle blueTextStyle = TextStyle(color: kBlueColor);
 
 class TugasMinggu2 extends StatelessWidget {
-  const TugasMinggu2({Key? key}) : super(key: key);
+  TugasMinggu2({Key? key}) : super(key: key);
+
+  var faker = new Faker();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,7 @@ class TugasMinggu2 extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 2),
                   child: Text(
-                    'username',
+                    faker.person.name(),
                     style: blackTextStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                 ),
@@ -110,7 +113,25 @@ class TugasMinggu2 extends StatelessWidget {
               ],
             ),
           ),
-          //TODO : GridView
+          GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            scrollDirection: Axis.vertical,
+            itemCount: 18,
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage('https://picsum.photos/id/${69 + index}/300/300'),
+                  ),
+                ),
+                // child: Center(
+                //   child: Text('${index + 1}'),
+                // ),
+              );
+            },
+          )
         ],
       ),
     );
@@ -129,7 +150,7 @@ class TugasMinggu2 extends StatelessWidget {
           backgroundColor: Colors.blue,
           // TODO : bugfix
           // backgroundImage: NetworkImage(imgUrl),
-          // child: add == true ? Icon(Icons.add) : null,
+          // child: add == true ? Icon(Icons.add) : SizedBox(),
         ),
         SizedBox(height: 4),
         Text(
@@ -207,7 +228,7 @@ class TugasMinggu2 extends StatelessWidget {
       title: Row(
         children: [
           Text(
-            'username',
+            faker.person.firstName(),
             style: blackTextStyle,
           ),
           IconButton(

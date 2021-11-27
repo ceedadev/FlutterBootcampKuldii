@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:faker/faker.dart';
 
@@ -23,7 +21,9 @@ class TugasMinggu2 extends StatelessWidget {
     return Scaffold(
       backgroundColor: kWhiteColor,
       appBar: appBarMethod(),
-      bottomNavigationBar: bottomNavBarMethod(),
+      // sebetulnya gapapa extract widget pakai fungsi, tapi diusahakan gunakan extract widget biasa ajah
+      // bottomNavigationBar: bottomNavBarMethod(),
+      bottomNavigationBar: const MyBottomNav(),
       body: ListView(
         children: [
           Padding(
@@ -54,23 +54,34 @@ class TugasMinggu2 extends StatelessWidget {
                               borderRadius: BorderRadius.circular(100),
                               color: kWhiteColor,
                               image: DecorationImage(
-                                  image: NetworkImage('https://picsum.photos/300/300'), fit: BoxFit.cover),
+                                image: NetworkImage('https://picsum.photos/300/300'),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    _profileCount(count: '99', title: 'Posts'),
-                    _profileCount(count: '168', title: 'Followers'),
-                    _profileCount(count: '199', title: 'Following'),
+                    // sebetulnya gapapa extract widget pakai fungsi, tapi diusahakan gunakan extract widget biasa ajah
+                    // _profileCount(count: '99', title: 'Posts'),
+                    // _profileCount(count: '168', title: 'Followers'),
+                    // _profileCount(count: '199', title: 'Following'),
+                    const ProfileCount(count: '99', title: 'Posts'),
+                    const ProfileCount(count: '168', title: 'Followers'),
+                    const ProfileCount(count: '199', title: 'Following'),
                   ],
                 ),
+                // kasih jarak dikit
+                const SizedBox(height: 10),
                 // username
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 2),
                   child: Text(
                     faker.person.name(),
-                    style: blackTextStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 24),
+                    style: blackTextStyle.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20, // 24 terlalu besar -> 20 masih oke
+                    ),
                   ),
                 ),
                 Container(
@@ -106,16 +117,23 @@ class TugasMinggu2 extends StatelessWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _storiesHighlights(title: 'Story 1', imgUrl: 'https://picsum.photos/id/1/300/300'),
-                    _storiesHighlights(title: 'Story 2', imgUrl: 'https://picsum.photos/id/2/300/300'),
-                    _storiesHighlights(title: 'Story 3', imgUrl: 'https://picsum.photos/id/3/300/300'),
-                    _storiesHighlights(title: 'Story 4', imgUrl: 'https://picsum.photos/id/4/300/300'),
-                    _storiesHighlights(title: 'Add', add: true),
+                  children: const [
+                    // sebetulnya gapapa extract widget pakai fungsi, tapi diusahakan gunakan extract widget biasa ajah
+                    // _storiesHighlights(title: 'Story 1', imgUrl: 'https://picsum.photos/id/1/300/300'),
+                    // _storiesHighlights(title: 'Story 2', imgUrl: 'https://picsum.photos/id/2/300/300'),
+                    // _storiesHighlights(title: 'Story 3', imgUrl: 'https://picsum.photos/id/3/300/300'),
+                    // _storiesHighlights(title: 'Story 4', imgUrl: 'https://picsum.photos/id/4/300/300'),
+                    // _storiesHighlights(title: 'Add', add: true),
+                    StoriesHighlights(title: 'Story 1', imgUrl: 'https://picsum.photos/id/1/300/300'),
+                    StoriesHighlights(title: 'Story 2', imgUrl: 'https://picsum.photos/id/2/300/300'),
+                    StoriesHighlights(title: 'Story 3', imgUrl: 'https://picsum.photos/id/3/300/300'),
+                    StoriesHighlights(title: 'Story 4', imgUrl: 'https://picsum.photos/id/4/300/300'),
+                    StoriesHighlights(title: 'Add', add: true),
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  // gunakan space arround saja
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     IconButton(
                       onPressed: () {},
@@ -137,11 +155,11 @@ class TugasMinggu2 extends StatelessWidget {
             ),
           ),
           GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, crossAxisSpacing: 1, mainAxisSpacing: 1),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 1, mainAxisSpacing: 1),
             scrollDirection: Axis.vertical,
             itemCount: 72,
-            physics: NeverScrollableScrollPhysics(),
+            // sudah bagus memanfaatkan settingan ini
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return Container(
@@ -150,9 +168,6 @@ class TugasMinggu2 extends StatelessWidget {
                     image: NetworkImage('https://picsum.photos/id/${69 + index}/300/300'),
                   ),
                 ),
-                // child: Center(
-                //   child: Text('${index + 1}'),
-                // ),
               );
             },
           )
@@ -161,11 +176,156 @@ class TugasMinggu2 extends StatelessWidget {
     );
   }
 
-  Column _storiesHighlights({
-    required String title,
-    String imgUrl = '',
-    bool add = false,
-  }) {
+  // Column _storiesHighlights({
+  //   required String title,
+  //   String imgUrl = '',
+  //   bool add = false,
+  // }) {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.center,
+  //     children: [
+  //       Container(
+  //         width: 68,
+  //         height: 68,
+  //         padding: EdgeInsets.all(1),
+  //         decoration: BoxDecoration(
+  //           color: kGreyColor,
+  //           borderRadius: BorderRadius.circular(100),
+  //         ),
+  //         child: Container(
+  //           width: 60,
+  //           height: 60,
+  //           decoration: BoxDecoration(
+  //             color: kWhiteColor,
+  //             borderRadius: BorderRadius.circular(100),
+  //             border: Border.all(color: kWhiteColor, width: 2),
+  //             image: DecorationImage(
+  //               image: NetworkImage(imgUrl),
+  //             ),
+  //           ),
+  //           child: add == true ? Image.asset('assets/icon/group1.png') : SizedBox(),
+  //         ),
+  //       ),
+  //       SizedBox(height: 4),
+  //       Text(
+  //         title,
+  //         style: blackTextStyle.copyWith(fontSize: 12),
+  //       )
+  //     ],
+  //   );
+  // }
+
+  // Column _profileCount({
+  //   required String count,
+  //   required String title,
+  // }) {
+  //   return Column(
+  //     children: [
+  //       Text(
+  //         count,
+  //         style: blackTextStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 24),
+  //       ),
+  //       Text(
+  //         title,
+  //         style: blackTextStyle.copyWith(fontWeight: FontWeight.w400, fontSize: 16),
+  //       ),
+  //     ],
+  //   );
+  // }
+
+  // BottomNavigationBar bottomNavBarMethod() {
+  //   return BottomNavigationBar(
+  //     showSelectedLabels: false,
+  //     showUnselectedLabels: false,
+  //     backgroundColor: kWhiteColor,
+  //     unselectedItemColor: kBlackColor,
+  //     selectedItemColor: kBlueColor,
+  //     type: BottomNavigationBarType.fixed,
+  //     elevation: 0,
+  //     items: [
+  //       const BottomNavigationBarItem(
+  //         label: 'Home',
+  //         icon: ImageIcon(
+  //           AssetImage('assets/icon/home.png'),
+  //         ),
+  //       ),
+  //       const BottomNavigationBarItem(
+  //         label: 'Search',
+  //         icon: ImageIcon(
+  //           AssetImage('assets/icon/search.png'),
+  //         ),
+  //       ),
+  //       const BottomNavigationBarItem(
+  //         label: 'Reels',
+  //         icon: ImageIcon(
+  //           AssetImage('assets/icon/reels.png'),
+  //         ),
+  //       ),
+  //       const BottomNavigationBarItem(
+  //         label: 'Shop',
+  //         icon: ImageIcon(
+  //           AssetImage('assets/icon/shop.png'),
+  //         ),
+  //       ),
+  //       BottomNavigationBarItem(
+  //         label: 'User',
+  //         icon: Image.asset('assets/icon/avatar.png'),
+  //       ),
+  //     ],
+  //   );
+  // }
+
+  AppBar appBarMethod() {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: kWhiteColor,
+      title: Row(
+        children: [
+          Text(
+            faker.person.firstName(),
+            style: blackTextStyle,
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const ImageIcon(
+              AssetImage('assets/icon/dropdown.png'),
+              color: Colors.black,
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.add_box_outlined),
+          color: kBlackColor,
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const ImageIcon(
+            AssetImage('assets/icon/burger.png'),
+            color: Colors.black,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class StoriesHighlights extends StatelessWidget {
+  const StoriesHighlights({
+    Key? key,
+    required this.title,
+    this.imgUrl,
+    this.add = false,
+  }) : super(key: key);
+
+  final String? imgUrl;
+  final String title;
+  final bool add;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -177,21 +337,33 @@ class TugasMinggu2 extends StatelessWidget {
             color: kGreyColor,
             borderRadius: BorderRadius.circular(100),
           ),
-          child: Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: kWhiteColor,
-              borderRadius: BorderRadius.circular(100),
-              border: Border.all(color: kWhiteColor, width: 2),
-              image: DecorationImage(
-                image: NetworkImage(imgUrl),
-              ),
-            ),
-            child: add == true ? Image.asset('assets/icon/group1.png') : SizedBox(),
-          ),
+          child: add == true && imgUrl == null
+              ? Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: kWhiteColor,
+                    borderRadius: BorderRadius.circular(100),
+                    border: Border.all(color: kWhiteColor, width: 2),
+                    image: const DecorationImage(
+                      image: AssetImage('assets/icon/group1.png'),
+                    ),
+                  ),
+                )
+              : Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: kWhiteColor,
+                    borderRadius: BorderRadius.circular(100),
+                    border: Border.all(color: kWhiteColor, width: 2),
+                    image: DecorationImage(
+                      image: NetworkImage(imgUrl!),
+                    ),
+                  ),
+                ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Text(
           title,
           style: blackTextStyle.copyWith(fontSize: 12),
@@ -199,11 +371,20 @@ class TugasMinggu2 extends StatelessWidget {
       ],
     );
   }
+}
 
-  Column _profileCount({
-    required String count,
-    required String title,
-  }) {
+class ProfileCount extends StatelessWidget {
+  const ProfileCount({
+    Key? key,
+    required this.count,
+    required this.title,
+  }) : super(key: key);
+
+  final String count;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         Text(
@@ -217,8 +398,15 @@ class TugasMinggu2 extends StatelessWidget {
       ],
     );
   }
+}
 
-  BottomNavigationBar bottomNavBarMethod() {
+class MyBottomNav extends StatelessWidget {
+  const MyBottomNav({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return BottomNavigationBar(
       showSelectedLabels: false,
       showUnselectedLabels: false,
@@ -255,42 +443,6 @@ class TugasMinggu2 extends StatelessWidget {
         BottomNavigationBarItem(
           label: 'User',
           icon: Image.asset('assets/icon/avatar.png'),
-        ),
-      ],
-    );
-  }
-
-  AppBar appBarMethod() {
-    return AppBar(
-      elevation: 0,
-      backgroundColor: kWhiteColor,
-      title: Row(
-        children: [
-          Text(
-            faker.person.firstName(),
-            style: blackTextStyle,
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const ImageIcon(
-              AssetImage('assets/icon/dropdown.png'),
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.add_box_outlined),
-          color: kBlackColor,
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: const ImageIcon(
-            AssetImage('assets/icon/burger.png'),
-            color: Colors.black,
-          ),
         ),
       ],
     );
